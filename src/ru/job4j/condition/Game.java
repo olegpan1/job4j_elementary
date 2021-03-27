@@ -1,19 +1,15 @@
 package ru.job4j.condition;
 
 public class Game {
-    public static void menu(String name) {
-        if (name.equals("super mario")) {
-            System.out.println("Start - super mario");
+    public static int checkGame(double percent, int prize, int pay) {
+        int rsl = 0;
+        if (percent * prize > pay) {
+            rsl = (int) (percent * prize - pay);
         }
-        if (name.equals("tanks")) {
-            System.out.println("Start - tanks");
-        }
-        if (name.equals("tetris")) {
-            System.out.println("Start - tetris");
-        }
+        return rsl;
     }
 
     public static void main(String[] args) {
-        menu("tanks");
+        System.out.println(checkGame(0.504, 100, 50));
     }
 }
