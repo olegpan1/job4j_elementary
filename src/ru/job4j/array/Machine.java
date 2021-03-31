@@ -9,9 +9,6 @@ public class Machine {
         int change = money - price;
         int size = 0;
         for (int coin : coins) {
-            if (change == 0) {
-                break;
-            }
             while (change >= coin) {
                 rsl[size] = coin;
                 change -= coin;

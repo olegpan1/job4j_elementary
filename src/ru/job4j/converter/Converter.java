@@ -14,13 +14,10 @@ public class Converter {
         int inRubles = 140;
         int expectedEuro = 2;
         int expectedDollar = 4;
-
         int outEuro = Converter.rubleToEuro(inRubles);
         int outDollar = Converter.rubleToDollar(inRubles);
-
         boolean passedEuro = outEuro == expectedEuro;
         boolean passedDollar = outDollar == expectedDollar;
-
         System.out.println("140 rubles are 2 euro. Test result : " + passedEuro);
         System.out.println("140 rubles are 4 dollars. Test result : " + passedDollar);
     }
