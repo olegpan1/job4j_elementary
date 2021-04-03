@@ -28,9 +28,9 @@ public class MaxTest {
     }
 
     @Test
-    public void when2Then4() {
-        int first = 3;
-        int second = 5;
+    public void when2Then5() {
+        int first = 5;
+        int second = 3;
         int rsl = Max.max(first, second);
         int expected = 5;
         Assert.assertEquals(expected, rsl);
