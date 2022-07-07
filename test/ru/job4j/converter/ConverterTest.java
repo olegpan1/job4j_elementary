@@ -7,17 +7,19 @@ public class ConverterTest {
 
     @Test
     public void whenConvert140RblThen2Euro() {
-        int in = 140;
-        int expected = 2;
-        int out = Converter.rubleToEuro(in);
-        Assert.assertEquals(expected, out);
+        float in = 140;
+        float expected = 2;
+        float out = Converter.rubleToEuro(in);
+        float eps = 0.0001f;
+        Assert.assertEquals(expected, out, eps);
     }
 
     @Test
-    public void whenConvert140RblThen4Dlr() {
-        int in = 140;
-        int expected = 4;
-        int out = Converter.rubleToDollar(in);
-        Assert.assertEquals(expected, out);
+    public void whenConvert180RblThen3Dlr() {
+        float in = 180;
+        float expected = 3;
+        float out = Converter.rubleToDollar(in);
+        float eps = 0.0001f;
+        Assert.assertEquals(expected, out, eps);
     }
 }
