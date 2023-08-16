@@ -1,9 +1,12 @@
 package ru.job4j.flatmap;
 
-import java.util.Optional;
-import java.util.UUID;
-import java.util.function.Supplier;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,22 +22,28 @@ public class Main {
 //                })
 //                .forEach(bar -> System.out.println(bar.name));
 
-        Supplier<Stream<String>> streamSupplier
-                = Stream::of;
-        Optional<String> result1 = streamSupplier.get()
-                .findAny();
-        System.out.println(result1.orElseGet(Main::emptyList));
-        Optional<String> result2 = streamSupplier.get()
-                .findFirst();
-        System.out.println(result2.orElseGet(Main::emptyList));
+//        Supplier<Stream<String>> streamSupplier
+//                = Stream::of;
+//        Optional<String> result1 = streamSupplier.get()
+//                .findAny();
+//        System.out.println(result1.orElseGet(Main::emptyList));
+//        Optional<String> result2 = streamSupplier.get()
+//                .findFirst();
+//        System.out.println(result2.orElseGet(Main::emptyList));
+//
+//        Supplier<UUID> randomUUIDSupplier = UUID::randomUUID;
+//        Stream<UUID> infiniteStreamOfRandomUUID = Stream.generate(randomUUIDSupplier);
+//
+//        infiniteStreamOfRandomUUID
+//                .skip(10)
+//                .limit(10)
+//                .forEach(System.out::println);
 
-        Supplier<UUID> randomUUIDSupplier = UUID::randomUUID;
-        Stream<UUID> infiniteStreamOfRandomUUID = Stream.generate(randomUUIDSupplier);
+        Stream<Double> anStream = Stream.of(1.1, 2.2, 3.3);
+        Stream<Double> newStream = insertInStream(anStream, 9.9, 2);
 
-        infiniteStreamOfRandomUUID
-                .skip(10)
-                .limit(10)
-                .forEach(System.out::println);
+        List<Double> resultList = newStream.collect(Collectors.toList());
+        resultList.forEach(System.out::println);
 
 //        List<String> valueList = new ArrayList<>();
 //        valueList.add("Joe");
@@ -52,6 +61,14 @@ public class Main {
 
     static String emptyList() {
         return "empty list";
+    }
+
+    private static <T> Stream<T> insertInStream(Stream <T> stream, T elem, int index) {
+        Spliterator<T> spliterator = stream.spliterator();
+        Iterator<T> iterator = Spliterators.iterator(spliterator);
+
+        return Stream.concat(Stream.concat(Stream.generate(iterator::next)
+                .limit(index), Stream.of(elem)), StreamSupport.stream(spliterator, false));
     }
 }
 
